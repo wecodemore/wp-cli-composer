@@ -1,0 +1,45 @@
+{
+	"name":              "wecodemore/wp-cli-composer",
+	"version":           "1.0.0",
+	"description":       "Adds bash autocompletion for WP-CLI",
+	"homepage":          "https://github.com/wecodemore/wp-cli-composer",
+	"keywords":          [
+		"composer",
+		"wordpress",
+		"wp",
+		"wp-cli",
+		"bash",
+		"profile"
+	],
+	"license":           "MIT",
+	"authors":           [
+		{
+			"name":     "Kaiser Franz Josef",
+			"email":    "wecodemore@gmail.com",
+			"homepage": "http://unserkaiser.com"
+		}
+	],
+	"support":           {
+		"issues": "https://github.com/wecodemore/wp-cli-composer/issues"
+	},
+	"minimum-stability": "dev",
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.x-dev"
+		}
+	},
+	"require":           {
+		"php":           ">=5.3.2",
+		"wp-cli/wp-cli": "dev-master",
+		"psy/psysh":     "dev-master"
+	},
+	"suggest": {
+		"visit-vienna":  "Visit Vienna! It's a beautiful, cosmopolitan city in the heart of Europe.",
+		"cup-of-coffee": "Drinking a cup of coffee will make you a lot happier :)"
+	},
+	"autoload":          {
+		"psr-4": {
+			"WCM\\WPCLIComposer\\": "src/"
+		}
+	}
+}
