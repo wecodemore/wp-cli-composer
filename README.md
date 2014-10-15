@@ -1,4 +1,4 @@
-# WP-CLI COmposer post-package-install script
+# WP-CLI Composer post-package-install script
 
 Install WP-CLI [using Composer](https://github.com/wp-cli/wp-cli/wiki/Alternative-Install-Methods).
 We recommend to use something like Andreys/[@Rarst](https://twitter.com/Rarst) recipe for a
@@ -15,5 +15,10 @@ your project. Simply add [WP-CLI](wp-cli.org) on top of that:
 Then setup the script
 
 	"scripts"      : {
-		"post-install-package" : []
+		"post-install-package" : [
+			"WCM\\WPCLIComposer\\WPCLICommand::postPackageInstall"
+		]
 	},
+
+Finally you will need to define a pointer to tell the post package installer where wp-cli was
+installed to
