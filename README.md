@@ -11,7 +11,10 @@ We recommend to use something like Andreys/"[@Rarst](https://twitter.com/Rarst)"
 [site stack](http://composer.rarst.net/recipe/site-stack) to get a thoughtful base structure for
 your project. Simply add [WP-CLI](wp-cli.org) on top of that:
 
-
+	"config":       {
+		"vendor-dir": "wp-content/vendor"
+	},
+	// ...
 	"require"      : {
 		// ... other software installed to /var/www/wp-content/vendor
 		"wp-cli/wp-cli"              : "0.17.*",
