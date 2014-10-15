@@ -8,6 +8,6 @@ class WPCLICommand
 {
 	public static function postPackageInstall( Event $event )
 	{
-
+		print_r( func_get_args() );
 	}
 }
