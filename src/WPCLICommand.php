@@ -64,6 +64,8 @@ class WPCLICommand
 				$io->write( '<info>No need to append anything to your bash profile.</info>' );
 			}
 
+			# @TODO symlink() to `/usr/share/bin`
+
 			return true;
 		}
 		return false;

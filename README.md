@@ -30,13 +30,17 @@ Then setup the script
 	},
 
 Finally you will need to define a pointer to tell the post package installer where wp-cli was
-installed to. In most cases this simply will be your users home directory/`~`, but you can
+installed to. In most cases this simply will be your users shared directory, but you can
 define custom locations as well.
 
 	"extra":        {
 		"wordpress-install-dir": "wp",
 		"bash-profile-dir":      "~"
 	}
+
+## TODO
+
+ + Add a `symlink()` from the WP-CLI bin to `/usr/share/wp`
 
 ## FAQ
 
