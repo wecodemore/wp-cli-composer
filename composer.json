@@ -1,45 +1,58 @@
 {
-	"name":              "wecodemore/wp-cli-composer",
-	"version":           "1.0.0",
-	"description":       "Adds bash autocompletion for WP-CLI",
-	"homepage":          "https://github.com/wecodemore/wp-cli-composer",
-	"keywords":          [
+	"name"              : "wecodemore/wp-cli-composer",
+	"version"           : "1.0.0",
+	"description"       : "Adds bash autocompletion for WP-CLI",
+	"homepage"          : "https://github.com/wecodemore/wp-cli-composer",
+	"keywords"          : [
 		"composer",
+		"plugins",
 		"wordpress",
 		"wp",
 		"wp-cli",
 		"bash",
 		"profile"
 	],
-	"license":           "MIT",
-	"authors":           [
+	"license"           : "MIT",
+	"authors"           : [
 		{
-			"name":     "Kaiser Franz Josef",
-			"email":    "wecodemore@gmail.com",
-			"homepage": "http://unserkaiser.com"
+			"name"     : "Kaiser Franz Josef",
+			"email"    : "wecodemore@gmail.com",
+			"homepage" : "http://unserkaiser.com"
 		}
 	],
-	"support":           {
-		"issues": "https://github.com/wecodemore/wp-cli-composer/issues"
+	"support"           : {
+		"issues" : "https://github.com/wecodemore/wp-cli-composer/issues"
 	},
-	"minimum-stability": "dev",
-	"extra": {
-		"branch-alias": {
-			"dev-master": "1.x-dev"
+	"minimum-stability" : "dev",
+	"extra"             : {
+		"branch-alias" : {
+			"dev-master" : "1.x-dev"
 		}
 	},
-	"require":           {
-		"php":           ">=5.3.2",
-		"wp-cli/wp-cli": "dev-master",
-		"psy/psysh":     "*"
+	"require"           : {
+		"php"           : ">=5.3.2",
+		"wp-cli/wp-cli" : "dev-master",
+		"psy/psysh"     : "*"
 	},
-	"suggest": {
-		"visit-vienna":  "Visit Vienna! It's a beautiful, cosmopolitan city in the heart of Europe.",
-		"cup-of-coffee": "Drinking a cup of coffee will make you a lot happier :)"
+	"require-dev"       : {
+		"composer/composer" : "^1.1",
+		"phpunit/phpunit"   : "^5.3"
 	},
-	"autoload":          {
-		"psr-4": {
-			"WCM\\WPCLIComposer\\": "src/"
+	"suggest"           : {
+		"visit-vienna"         : "Visit Vienna! It's a beautiful, cosmopolitan city in the heart of Europe.",
+		"wecodemore/wpstarter" : "Easily bootstrap whole site Composer packages for WordPress."
+	},
+	"autoload"          : {
+		"psr-4"                 : {
+			"WCM\\WPCLIComposer\\" : "src/"
+		},
+		"exclude-from-classmap" : [
+			"/test"
+		]
+	},
+	"autoload-dev"      : {
+		"psr-4" : {
+			"WCM\\WPCLIComposer\\Test\\" : "test/"
 		}
 	}
 }
