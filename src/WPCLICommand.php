@@ -127,8 +127,10 @@ class WPCLICommand
 	private static function isAppendable( $source, $target )
 	{
 		return
-			file_exists( $target )
-			&& false === strpos( file_get_contents( $target ), $source )
+			(
+				file_exists( $target )
+				and false === strpos( file_get_contents( $target ), $source )
+			)
 			or ! file_exists( $target );
 	}
 }

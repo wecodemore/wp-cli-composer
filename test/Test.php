@@ -18,9 +18,8 @@ class Test extends TestCase
 	}
 
 	public static function tearDownAfterClass() {
-		#fclose( self::$handler );
-		#unlink( self::$file );
-
+		fclose( self::$handler );
+		unlink( self::$file );
 	}
 
 	public function testExtraExists()
@@ -64,6 +63,8 @@ class Test extends TestCase
 		$extra = [ 'bash-profile-dir' => dirname(self::$file), ];
 		$pkg->setExtra( $extra );
 
-		$this->assertFalse( WPCLICommand::appendCmd( $io, $pkg ) );
+		# @TODO Check different return values
+		# Make and add file, check against existing data, …
+		$this->assertTrue( WPCLICommand::appendCmd( $io, $pkg ) );
 	}
 }
