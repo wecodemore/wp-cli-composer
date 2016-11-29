@@ -4,7 +4,9 @@
 
 Usage as Composer post-package-install script. Adds bash autocompletion when WP-CLI gets installed
 using Composer. **This package** mostly **is a convenience package that should make the build process
-easier**.
+easier**. 
+
+This package needs 20 seconds to set up. Zero maintenance.
 
 ## How To
 
