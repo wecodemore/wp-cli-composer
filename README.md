@@ -1,3 +1,5 @@
+![CircleCI Test Status: Master Branch](https://circleci.com/gh/wecodemore/wp-cli-composer/tree/master.svg?style=shield&circle-token=8ed7e3862c3aa5e9b02558be9679cc87881eb59d)
+
 # WP-CLI Bash Autocomplete
 
 Usage as Composer post-package-install script. Adds bash autocompletion when WP-CLI gets installed
