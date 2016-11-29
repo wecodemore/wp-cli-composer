@@ -4,6 +4,7 @@ namespace WCM\WPCLIComposer;
 
 use Composer\Script\Event;
 use Composer\IO\IOInterface;
+use Composer\Package\PackageInterface;
 
 class WPCLICommand
 {
@@ -15,60 +16,20 @@ class WPCLICommand
 	public static function postPackageInstall( Event $event )
 	{
 		$io = $event->getIO();
-		if ( $io->askConfirmation( '<info>Do you want to append WP-CLI bash autocomplete to `.bash_profile?`?</info> [<comment>Y/n</comment>] ', false ) )
-		{
-			$package = $event
-				->getComposer()
-				->getPackage();
-			$extra = $package->getExtra();
 
-			if ( ! isset( $extra['bash-profile-dir'] ) )
-			{
-				$io->write( '<info>You must set "extra" : { "bash-profile-dir" } in your `composer.json` file. Skipping.</info>' );
-				return false;
-			}
+		$package = $event
+			->getComposer()
+			->getPackage();
 
-			$search = 'wp-cli/wp-cli';
-			$requires     = array_keys( $package->getRequires() );
-			$requires_dev = array_keys( $package->getDevRequires() );
-			if (
-				! isset( $requires[ $search ] )
-				XOR ! isset( $requires_dev[ $search ] )
-				)
-			{
-				$io->write( '<info>This package is a dependency of `wp-cli/wp-cli`. Skipping.</info>' );
-				return false;
-			}
+		if ( ! self::checkExtraEntry( $io, $package ) )
+			return false;
 
-			$target = self::getDir( $io, $extra['bash-profile-dir'] );
-			$target = "{$target}/.bash_profile";
+		if ( ! self::checkDependencies( $io, $package ) )
+			return false;
 
-			$source = "\n".file_get_contents( __DIR__.'/../ci/.wpcli_profile' );
-			if (
-				(
-					file_exists( $target )
-					AND false === strpos( file_get_contents( $target ), $source )
-				)
-				OR ! file_exists( $target )
-				)
-			{
-				file_put_contents(
-					$target,
-					$source,
-					FILE_APPEND
-				);
-				$io->write( '<info>Successfully appended WP-CLI auto-completion to your bash profile.</info>' );
-			}
-			else
-			{
-				$io->write( '<info>No need to append anything to your bash profile.</info>' );
-			}
+		self::appendCmd( $io, $package );
 
-			# @TODO symlink() to `/usr/share/bin`
-
-			return true;
-		}
-		return false;
+		return true;
 	}
 
 	/**
@@ -79,10 +40,10 @@ class WPCLICommand
 	 */
 	public static function getDir( IOInterface $io, $dir )
 	{
-		if ( ! is_dir( getcwd()."/{$dir}" ) )
+		if ( ! is_dir( $dir ) )
 		{
 			$io->write( sprintf(
-				'<info>The specified `.bash_profile` location %s does not exist.</info>',
+				'<info>The `.bash_profile` specified location specified in the composer.json file: %s does not exist.</info>',
 				$dir
 			) );
 			$dir = $io->ask( '<info>Please provide the root directory for your `.bash_profile` file:</info> ', $dir );
@@ -90,5 +51,85 @@ class WPCLICommand
 		}
 
 		return $dir;
+	}
+
+
+	/**
+	 * @param \Composer\IO\IOInterface           $io
+	 * @param \Composer\Package\PackageInterface $package
+	 * @return bool
+	 */
+	public static function checkExtraEntry( IOInterface $io, PackageInterface $package )
+	{
+		$extra = $package->getExtra();
+		if ( ! isset( $extra['bash-profile-dir'] ) )
+		{
+			$io->writeError( '<info>You must set "extra" : { "bash-profile-dir" } in your `composer.json` file. Skipping.</info>' );
+			return false;
+		}
+
+		return true;
+	}
+
+
+	/**
+	 * @param \Composer\IO\IOInterface           $io
+	 * @param \Composer\Package\PackageInterface $package
+	 * @return bool
+	 */
+	public static function checkDependencies( IOInterface $io, PackageInterface $package )
+	{
+		$search = 'wp-cli/wp-cli';
+		$requires    = $package->getRequires();
+		$requiresDev = $package->getDevRequires();
+
+		if (
+			isset( $requires[ $search ] )
+			OR isset( $requiresDev[ $search ] )
+		)
+			return true;
+
+		$io->writeError( '<info>This package is a dependency of `wp-cli/wp-cli`. Skipping.</info>' );
+		return false;
+	}
+
+
+	/**
+	 * @param \Composer\IO\IOInterface           $io
+	 * @param \Composer\Package\PackageInterface $package
+	 * @return bool Just to make unit testing easier
+	 */
+	public static function appendCmd( IOInterface $io, PackageInterface $package )
+	{
+		$extra  = $package->getExtra();
+		$target = self::getDir( $io, $extra['bash-profile-dir'] );
+		$target = "{$target}/.bash_profile";
+
+		$source = "\n".file_get_contents( __DIR__.'/../ci/.wpcli_profile' );
+
+		if (
+			self::isAppendable( $source, $target )
+			and false !== file_put_contents( $target, $source, FILE_APPEND )
+		) {
+			$io->write( '<info>Successfully appended WP-CLI auto-completion to your bash profile.</info>' );
+			return true;
+		}
+
+		$io->write( '<info>No need to append anything to your bash profile.</info>' );
+		return false;
+	}
+
+	/**
+	 * @param string $source
+	 * @param string $target
+	 * @return bool
+	 */
+	private static function isAppendable( $source, $target )
+	{
+		return (
+				file_exists( $target )
+				and false === strpos( file_get_contents( $target ), $source )
+			)
+			or ! file_exists( $target );
 	}
 }
