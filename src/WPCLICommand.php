@@ -4,7 +4,7 @@ namespace WCM\WPCLIComposer;
 
 use Composer\Script\Event;
 use Composer\IO\IOInterface;
-use \Composer\Package\PackageInterface;
+use Composer\Package\PackageInterface;
 
 class WPCLICommand
 {
@@ -126,8 +126,7 @@ class WPCLICommand
 	 */
 	private static function isAppendable( $source, $target )
 	{
-		return
-			(
+		return (
 				file_exists( $target )
 				and false === strpos( file_get_contents( $target ), $source )
 			)
