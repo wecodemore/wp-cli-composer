@@ -13,7 +13,7 @@ class Setup
 	 * @param Event $event
 	 * @return bool
 	 */
-	public static function postPackageInstall( Event $event )
+	public static function install( Event $event )
 	{
 		$io = $event->getIO();
 
