@@ -1,12 +1,12 @@
 <?php
 
-namespace WCM\WPCLIComposer;
+namespace WCM\WPCLI\Autocomplete;
 
 use Composer\Script\Event;
 use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;
 
-class WPCLICommand
+class Setup
 {
 	/**
 	 * Append the WP-CLI auto-completion bash script to the users `~/.bash_profile`
