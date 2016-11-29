@@ -53,7 +53,7 @@ define custom locations as well.
 
 #### **Q:** What happens if I'm not sure and the bash profile location is probably wrong?
 
-**A:** The script does only check if the directory exists and not if
+**A:** The script does only check if the directory exists and not if 
 you got a `.bash_profile` file there. If there is none, it will attempt to create one for you.
 
 #### **Q:** What version should I refer to in my `composer.json`?
