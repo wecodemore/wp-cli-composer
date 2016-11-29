@@ -1,8 +1,12 @@
+![CircleCI Test Status: Master Branch](https://circleci.com/gh/wecodemore/wp-cli-composer/tree/master.svg?style=shield&circle-token=8ed7e3862c3aa5e9b02558be9679cc87881eb59d)
+
 # WP-CLI Bash Autocomplete
 
 Usage as Composer post-package-install script. Adds bash autocompletion when WP-CLI gets installed
 using Composer. **This package** mostly **is a convenience package that should make the build process
-easier**.
+easier**. 
+
+This package needs 20 seconds to set up. Zero maintenance.
 
 ## How To
 
@@ -11,8 +15,7 @@ your project. Simply add [WP-CLI](wp-cli.org) on top of that:
 
 ```json
 "require"      : {
-	// … other software installed to your vendor dir
-	"wp-cli/wp-cli"              : "0.17.*",
+	"wp-cli/wp-cli"              : "~1.0",
 	"wecodemore/wp-cli-composer" : "~1.0"
 },
 ```
