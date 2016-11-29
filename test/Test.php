@@ -60,11 +60,22 @@ class Test extends TestCase
 		$io  = new NullIO;
 		$pkg = new Package( 'test/test', 1, 1 );
 
-		$extra = [ 'bash-profile-dir' => dirname(self::$file), ];
+		$extra = [ 'bash-profile-dir' => dirname( self::$file ), ];
 		$pkg->setExtra( $extra );
 
-		# @TODO Check different return values
+		# Is appendable?
+		$this->assertFileExists( self::$file );
+
+		# Pretty much the same as the internal behavior.
+		# This test as well tests if the tmp file setup worked out in the setup method.
+		$source = file_get_contents( __DIR__.'/../ci/.wpcli_profile' );
+		$result = file_put_contents( self::$file, $source, FILE_APPEND );
+		$this->assertInternalType('integer', $result);
+		$this->assertTrue( false !== strpos( $source, file_get_contents( self::$file ) ) );
+
 		# Make and add file, check against existing data, …
 		$this->assertTrue( WPCLICommand::appendCmd( $io, $pkg ) );
+		# …repetitive calls do not duplicate the appended auto-complete script.
+		$this->assertFalse( WPCLICommand::appendCmd( $io, $pkg ) );
 	}
 }

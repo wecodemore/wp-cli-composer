@@ -49,12 +49,11 @@ define custom locations as well.
 
 #### **Q:** If I ran this twice by accident, do I then have the scripts appended twice?
 
-**A:** No, the script is smart enough to care about that and adds itself only once.
+**A:** No, the script is smart enough to care about that and appends itself only once.
 
 #### **Q:** What happens if I'm not sure and the bash profile location is probably wrong?
 
-**A:** The script is smart enough to care about that and ask you again (and again, and again, ...)
-until you found a location that exists. Still it does only check if the directory exists and not if
+**A:** The script does only check if the directory exists and not if
 you got a `.bash_profile` file there. If there is none, it will attempt to create one for you.
 
 #### **Q:** What version should I refer to in my `composer.json`?
