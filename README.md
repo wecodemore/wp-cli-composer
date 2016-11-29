@@ -14,7 +14,7 @@ Install WP-CLI [using Composer](https://github.com/wp-cli/wp-cli/wiki/Alternativ
 your project. Simply add [WP-CLI](wp-cli.org) on top of that:
 
 ```json
-"require"      : {
+"require" : {
 	"wp-cli/wp-cli"              : "~1.0",
 	"wecodemore/wp-cli-composer" : "~1.0"
 },
@@ -23,9 +23,9 @@ your project. Simply add [WP-CLI](wp-cli.org) on top of that:
 Then setup the script
 
 ```
-"scripts"      : {
+"scripts" : {
 	"post-install-cmd" : [
-		"WCM\\WPCLIComposer\\WPCLICommand::postPackageInstall"
+		"WCM\\WPCLI\\Autocomplete\\Setup::install"
 	]
 },
 ```

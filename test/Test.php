@@ -1,12 +1,12 @@
 <?php
 
-namespace WCM\WPCLIComposer\Test;
+namespace WCM\WPCLI\Autocomplete\Test;
 
 use Composer\IO\NullIO;
 use Composer\Package\Package;
 
 use PHPUnit\Framework\TestCase;
-use WCM\WPCLIComposer\WPCLICommand;
+use WCM\WPCLI\Autocomplete\Setup;
 
 class Test extends TestCase
 {
@@ -29,11 +29,11 @@ class Test extends TestCase
 		$pkg = new Package( 'test/test', 1, 1 );
 		$extra = [ 'bash-profile-dir' => '/home/foo', ];
 		$pkg->setExtra( $extra );
-		$this->assertTrue( WPCLICommand::checkExtraEntry( $io, $pkg ) );
+		$this->assertTrue( Setup::checkExtraEntry( $io, $pkg ) );
 
 		$empty = new Package( 'test/test', 2, 2 );
 		$empty->setExtra( [] );
-		$this->assertFalse( WPCLICommand::checkExtraEntry( $io, $empty ) );
+		$this->assertFalse( Setup::checkExtraEntry( $io, $empty ) );
 	}
 
 	public function testPackageExists()
@@ -43,7 +43,7 @@ class Test extends TestCase
 		$deps = [ 'wp-cli/wp-cli' => '*', ];
 		$pkg->setRequires( $deps );
 		$pkg->setDevRequires( $deps );
-		$this->assertTrue( WPCLICommand::checkDependencies( $io, $pkg ) );
+		$this->assertTrue( Setup::checkDependencies( $io, $pkg ) );
 	}
 
 	public function testPackageNotExists()
@@ -52,7 +52,7 @@ class Test extends TestCase
 		$pkg = new Package( 'test/test', 1, 1 );
 		$pkg->setRequires( [] );
 		$pkg->setDevRequires( [] );
-		$this->assertFalse( WPCLICommand::checkDependencies( $io, $pkg ) );
+		$this->assertFalse( Setup::checkDependencies( $io, $pkg ) );
 	}
 
 	public function testAppendCmdOutput()
@@ -74,8 +74,8 @@ class Test extends TestCase
 		$this->assertTrue( false !== strpos( $source, file_get_contents( self::$file ) ) );
 
 		# Make and add file, check against existing data, …
-		$this->assertTrue( WPCLICommand::appendCmd( $io, $pkg ) );
+		$this->assertTrue( Setup::appendCmd( $io, $pkg ) );
 		# …repetitive calls do not duplicate the appended auto-complete script.
-		$this->assertFalse( WPCLICommand::appendCmd( $io, $pkg ) );
+		$this->assertFalse( Setup::appendCmd( $io, $pkg ) );
 	}
 }
