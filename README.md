@@ -16,7 +16,7 @@ your project. Simply add [WP-CLI](wp-cli.org) on top of that:
 ```json
 "require" : {
 	"wp-cli/wp-cli"              : "~1.0",
-	"wecodemore/wp-cli-composer" : "~1.0"
+	"wecodemore/wp-cli-composer" : "~2.0"
 },
 ```
 
