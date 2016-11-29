@@ -1,10 +1,4 @@
 {
-	"name":              "wecodemore/wp-cli-composer",
-	"version":           "1.0.0",
-	"description":       "Adds bash autocompletion for WP-CLI",
-	"homepage":          "https://github.com/wecodemore/wp-cli-composer",
-	"keywords":          [
-		"composer",
 	"name"              : "wecodemore/wp-cli-composer",
 	"version"           : "1.0.0",
 	"description"       : "Adds bash autocompletion for WP-CLI",
