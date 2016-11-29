@@ -43,7 +43,7 @@
 	},
 	"autoload"          : {
 		"psr-4"                 : {
-			"WCM\\WPCLIComposer\\" : "src/"
+			"WCM\\WPCLI\\Autocomplete\\" : "src/"
 		},
 		"exclude-from-classmap" : [
 			"/test"
@@ -51,7 +51,7 @@
 	},
 	"autoload-dev"      : {
 		"psr-4" : {
-			"WCM\\WPCLIComposer\\Test\\" : "test/"
+			"WCM\\WPCLI\\Autocomplete\\Test\\" : "test/"
 		}
 	}
 }
